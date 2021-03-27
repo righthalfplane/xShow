@@ -29,11 +29,18 @@ configure --prefix=/usr/local
 make -j 8
 sudo make install-lib
 ********************************
-hdf-4.2.5.tar.gz
+
+
+setenv CFLAGS -Wno-implicit-function-declaration
+tar -zxvf hdf-4.2.15.tar.gz
+cd hdf-4.2.15
 configure --prefix=/usr/local --disable-fortran --with-jpeg=/usr/local --with-zlib=/usr/local
 make -j 8
 sudo make install
 *********************************
+
+
+
 xShow17.0e5MPI.tgz
 
 tar -zxvf xShow17.0e5MPI.tgz
