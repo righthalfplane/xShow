@@ -1,4 +1,4 @@
-# tcsh
+#!/bin/tcsh
 tar -zxvf zlib-1.2.1.tar.gz
 cd zlib-1.2.1
 configure --prefix=/usr/local
