@@ -20,8 +20,8 @@ sudo make install
 cd ..
 tar -zxvf xShow17.0e5MPI.tgz
 cd xShow17.0e5MPI
-make -f makefileDARWIN -j 8
-make -f makefileDARWIN hdfsend
+make -f makefileUbunta -j 8
+make -f makefileUbunta hdfsend
 cd ..
 
 
