@@ -1,0 +1,14 @@
+{
+	plotgetlimits(s,xmin,ymin,zmin,xmax,ymax,zmax,xsize,ysize,zsize,time,framecount);
+	print("xmin %g ",xmin);
+	print("ymin %g ",ymin);
+	print("zmin %g ",zmin);
+	print("xmax %g ",xmax);
+	print("ymax %g ",ymax);
+	print("zmax %g ",zmax);
+	print("xsize %g ",xsize);
+	print("ysize %g ",ysize);
+	print("zsize %g ",zsize);
+	print("time %g ",time);
+	print("framecount %g \n",framecount);
+}

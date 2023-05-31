@@ -1,0 +1,62 @@
+{
+    /* Evaluate */
+    
+    /* test random lines inside sphere */
+    
+    
+    pi=4.0*atan(1.0);
+    
+    
+    dtor=pi/180;
+    
+    nangle=10;
+    
+    y=size(nangle,1);
+
+    setoption(y,"line",1);
+        
+    x=size(nangle,1);
+    
+    delta=360/nangle;
+    
+    r=3.4;
+    
+    for(m=0;m<200;++m){
+    
+    	xc=10.5+2.0*(random(0)-0.5);
+    
+    	yc=10.5+2.0*(random(0)-0.5);
+    
+    	zc=10.5+2.0*(random(0)-0.5);
+
+    	for(k=0;k<nangle;++k){
+        
+        	angle=(0.5+k)*delta;
+        
+    		lineplotset(s, xc,yc,zc ,xc+r*cos(angle*dtor),yc+r*sin(angle*dtor),zc, 0);
+
+    		setoption(s,"integrate",1);
+
+    		out=s:density;
+    	
+    		integral=getoption(out,"integral");
+    	
+    		free(out);
+    	
+  	 		copy(integral,0,y,k,1);
+  	 	
+ 	 		copy(angle,0,x,k,1);  	
+   	   	
+    	}
+    
+    	avg=sum(y)/nangle;
+    
+    	maxf=max(fabs(y));
+    
+    	diff=100*fabs(y-avg)/maxf;
+    
+     	print("maximum percentage difference %g\n",max(diff));  
+     }
+ 
+    
+}

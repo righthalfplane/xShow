@@ -1,0 +1,90 @@
+pname = "heat2d"
+
+! ----- CONTROL
+
+ncmax   = 900000
+tmax    = 1.0
+tedit   = 0.01
+ncedit  = 0
+modcyc  = 0
+kread   = -1
+dtpct   = 0.0
+uselast = .false.
+shortmodcyc = 1
+cylin  = .false.  
+
+doheat = .true.
+dohydro = .false.
+
+dtmax = .01
+
+
+! ----- SETUP
+
+imxset = 100
+jmxset = 100
+dxset  =  .031415926
+dyset  =  .031415926
+xzero  = 0
+yzero  = 0
+
+! ----- MATERIALS
+
+keos   =  0
+nummat =  1
+
+matdef(1,1)  =  0.0
+matdef(16,1) =  0.4
+!matdef(30,1) =  1.0e11
+matdef(30,1) =  .2080
+!matdef(20,1) =  .01
+!matdef(82,1) = 2e9
+matdef(82,1) = 2.778e-3
+
+
+
+! ----- REGIONS
+
+numreg      =  2
+
+
+matreg(1)   = 1
+rhoreg(1)   =  0.0978
+tevreg(1)   =  0.0
+
+
+matreg(2)   = 1
+rhoreg(2)   =  0.0978
+tevreg(2)   =  100.0
+xlreg(2) = .78539815  
+xrreg(2) = 2.35619445
+ybreg(2) = .78539815
+yareg(2) = 2.35619445        
+
+
+
+!periodx = .true.
+
+! ----- FREEZE
+
+freeze_num = 0
+
+
+!freeze_x_lo(1) = -1
+!freeze_x_hi(1) =  -0
+
+!freeze_x_lo(2) = 8
+!freeze_x_hi(2) =  9
+
+!uselast = .false.
+!numinit = 0
+!numlev = 1
+!fvolpct = 0.01
+!sizemat(1) = 0.01, 0.0025
+!sizebnd(1) = 0.01, 0.0025
+
+
+dodmpxdt = .true.
+heat_fluxlim = .false.
+    
+

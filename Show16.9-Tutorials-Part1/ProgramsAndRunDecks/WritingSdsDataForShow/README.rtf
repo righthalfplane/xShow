@@ -1,0 +1,57 @@
+{\rtf1\mac\ansicpg10000\cocoartf824\cocoasubrtf410
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw9240\paperh8500\vieww14100\viewh10480\viewkind0
+\pard\tx1440\tx2880\tx4320\tx5760\tx7200\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0       This folder contains examples of how to creating the five types of SDS files that can be read by the Show program. All of the data types are written by setting the structure members and calling the subroutine  writesds. Two and three dimensional data set are supported directly and one dimensional data can be handled by padding it out to 20 or more pixel wide two dimensional data set.\
+\
+   The data is calculated and passed to the writing routines in double precision, but the program converts to the correct form before writing it out to the files. The structure member are -\
+\
+path         -   the path to the file\
+name       -   the data set name \
+pioName -   the data type name\
+ixmax       -   the number of cell centered data points in the x direction\
+iymax       -   the number of cell centered data points in the y direction\
+izmax       -   the number of cell centered data points in the z direction\
+data          -   the ixmax*iymax*izmax double precison cell centered data points\
+xmin         -   the minimum x direction coordinate of the outside edge of the region \
+xmax        -   the maximum x direction coordinate of the outside edge of the region \
+ymin         -   the minimum y direction coordinate of the outside edge of the region \
+ymax        -   the maximum y direction coordinate of the outside edge of the region \
+vmin         -   the minimum data value - calculated\
+vmax        -   the maximum data value - calculated\
+time          -    the time for the data set being written\
+type          -    DATA_TYPE_DOUBLE write two dimensional double precision data\
+                  -    DATA_TYPE_FLOAT write two dimensional single precision data\
+                  -    DATA_TYPE_BYTE write two dimensional single byte raster data\
+                  -    DATA_TYPE_DOUBLE_3D write three dimensional double precision data\
+                  -    DATA_TYPE_FLOAT_3D write three dimensional single precision data\
+n                -     n equal to zero to start new data set. n greater than zero to add to a data set\
+\
+\
+\
+     If you compile and run cWriteSdsForShow.c or fWriteSdsForShow.f90 of , they generate three files and two files sequences. The two dimensional files - waveBytes.hdf is a raster file, waveFloat.s2d is a single precision file, waveDouble.s2d is a double precision file. The three dimensional sequences of files - waveDouble3d with double precision and  waveFloat3d with single precision. For the two dimensional files, a circle moves from (xmin,ymin) to (xmax,ymax) in 100 steps. For the three dimensional files, a sphere moves from (xmin,ymin,zmin) to (xmax,ymax,zmax) in 100 steps. The diff_bd files subtracts the raster data from the double precision data to show the error in the raster approximation. The diff_fd files subtracts the single precision data from the double precision data to show the precision lost in using single precision. These plots are quite interesting.\
+\
+    The ".bch" files are batch scripts that can run from a Show expression window. After correcting the file paths to match your setup, select "Run as Batch" from the "Operations" menu in the expression window. This will run the script and open a window with the results. The names in the batch script can conflict with window names - so it is best to start with only the expression window open.\
+\
+    The ".exp" files are expression scripts that can run from a Show expression window. Here is the comment from diff_fd that explains how to use it -\
+\
+\
+/* \
+   Open this file into a Show expression window\
+   Open file waveFloat.s2d\
+   Change the window name to "f" with the "Information" dialog\
+   Open file waveDouble.s2d\
+   Change the window name to "d" with the "Information" dialog\
+   Close window "diff_fd" - if it exists\
+   Select "Auto..." from the "Operations" menu to open the "Auto" dialog\
+   Set the controller to "d" in the "Auto" dialog\
+   Click the "Ok" button in the "Auto" dialog\
+   The window "diff_fd" should open with the results.\
+    \
+   diff_fd shows the precision lost by using floats instead of doubles\
+      \
+*/\
+\
+}

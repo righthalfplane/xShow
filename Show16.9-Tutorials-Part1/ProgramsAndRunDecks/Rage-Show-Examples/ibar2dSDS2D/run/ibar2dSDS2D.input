@@ -1,0 +1,117 @@
+!     SAGE Input
+
+mincellpe = 200
+
+pname = "ibar"
+
+kread =   -1              ! (start cycle  -1=not a restart)
+ncmax =   160000          ! Maximum number of cycles (20000 for fine zones)
+
+tmax = 5.0e-6             ! Maximum time (sec) (full + pulse at 20m)
+
+tedit = 1.0e-7
+
+
+hdfnum = 5
+hdfdt = 5*1.e-7
+hdftype = 'rho', 'prs', 'eps', 'sj2', 'ydt'
+hdfimx =  5*150
+hdfjmx =  5*510
+hdfxmn = 5*0.0 
+hdfxmx = 5*1.0 
+hdfymn = 5*0.0
+hdfymx = 5*3.4
+
+modcyc = 0        
+
+! -- Physics packages
+
+dohydro = .true.
+
+grid = .false.
+
+flggeo = 0
+flgvec = 0
+
+! Geometry
+sphere = .false.          ! 1-D spherical geometry
+cylin  = .true.           ! 2-D cylindrical geometry
+
+imxset = 4              ! even number of base grid zones in x direction
+jmxset = 12              ! even number of base grid zones in y direction
+dxset = .32              ! x zone width 
+dyset = .32              ! y zone width 
+xzero =  0.0             ! left edge of grid
+yzero =  0.0            ! bottom edge of grid
+
+mxcells = 1500000        ! maximum number of zones
+
+
+! -- EOS setup
+
+nummat = 2                ! number of materials
+
+keos   = -1
+
+matdef(16,1) = 0.4            ! air
+matdef(30,1) = 1.0e11
+
+matdef(3,2)   = 1.3e12         ! Cu
+matdef(16,2)  = 0.8939
+matdef(21,2)  = 8.93
+matdef(26,2)  = 0.0257
+matdef(28,2)  = 1.0e6
+matdef(30,2)  = 2.886e11
+
+matdef(5,2)  =    -1.0e33
+matdef(7,2)  = 4.33333e11
+matdef(12,2)  =    4.00e9
+matdef(39,2)  =       1
+matdef(49,2)  =    1.0e10
+
+
+mshow_num = 1
+mshow_type(1) = 'sie'
+
+maxcellpe = 1000000
+
+!  Definition of the material regions
+
+numreg = 2
+
+matreg(1) = 1             ! ambient air
+typreg(1) = 0             ! 
+prsreg(1) = 1.013e6       ! pressure dy/cm**2
+tevreg(1) = 0.0256917     ! # 0.024832=15 C  0.0256917=25 C)
+
+
+
+matreg(2) = 2             ! bar
+typreg(2) = 0             ! 
+xlreg(2) = 0.             !
+xrreg(2) = .32
+ybreg(2) = 0
+yareg(2) = 3.24             
+ydreg(2) = -22700
+prsreg(2) = 1.013e6      ! ambient pressure
+tevreg(2) = 0.0256917    ! # 0.024832=15 C  0.0256917=25 C)
+
+
+
+! CHANGES
+
+uselast = .false.
+numinit = 0
+numlev = 1
+fvolpct = 0.01
+sizemat(1) = 0.32, 0.02
+sizebnd(1) = 0.32, 0.02
+
+dodmpxdt = .true.
+
+strength_option = 1
+
+hydro_version = 2
+
+interface_option = 2
+

@@ -1,0 +1,47 @@
+!
+! load this file into an Show expression window
+! close windows "b", "d", and "diff_bd" before running - if they exist
+! make sure the file paths are correct
+! select "Run as Batch" from the "Operations" menu in the expression window
+! diff_bd shows the precision lost by using a bytes instead of doubles
+!
+
+clear
+
+filelist open b "/Users/dir/CodeWarrior_8.0/mShow/mShow-Other/WritingDataForShow"
+	waveBytes.hdf
+end
+
+filelist open d "/Users/dir/CodeWarrior_8.0/mShow/mShow-Other/WritingDataForShow"
+    waveDouble.s2d
+end
+
+expression
+{
+    xmin=0;
+    xmax=1440;
+    ymin=480;
+    ymax=1440;
+    
+    xsize=720;
+    ysize=480;
+     
+    areaplotset(b,xmin,ymin,0, xmax,ymax,0,xsize,ysize,1);
+    areaplotset(d,xmin,ymin,0, xmax,ymax,0,xsize,ysize,1);
+    window("diff_bd",size(xsize,ysize));
+
+    outs=b;
+    outd=d;
+        
+   maxf=max(fabs(outd));
+   diff_bd=100*fabs(outs-outd)/maxf;
+   print("maximum percentage difference %g\n",max(diff_bd));
+   
+   plotsetlimits(diff_bd,"diff",d);
+
+}
+step d
+end
+filelist close s
+filelist close d
+exit

@@ -1,0 +1,53 @@
+{
+   
+    	x1=14.1024;
+    
+    	y1=13.4948;
+    
+    	z1=10.8798;
+
+
+
+    	x2=8.33802;
+    
+    	y2=13.5126;
+    
+    	z2=13.388;
+    	
+    	
+    	l=sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)+(z2-z1)*(z2-z1));
+    	
+        
+    	lineplotset(s, x1,y1,z1 ,x2,y2,z2, 0);
+
+    	setoption(s,"integrate",1);
+
+    	out=s:density;
+    	
+    	integral=getoption(out,"integral");
+    	
+    	v=integral/l;
+    	
+     		print("l %g ",l); 
+     		print("integral %g ",integral); 
+     		print("integral %g\n",v); 
+     		print("x1 %g ",x1);
+     		print("y1 %g ",y1);
+     		print("z1 %g \n",z1);
+
+     		
+     		print("x2 %g ",x2);
+     		print("y2 %g ",y2);
+     		print("z2 %g \n",z2);
+     		
+       	    xsize=getoption(out,"xsize");
+      		print("xsize %g ",xsize);
+     	    xdata=getoption(out,"xdata");
+     	    v=pick(xdata,xsize-1);
+       		print("last %g \n\n",v);
+       		free(xdata);
+    		
+    	free(out);
+     		
+    
+}

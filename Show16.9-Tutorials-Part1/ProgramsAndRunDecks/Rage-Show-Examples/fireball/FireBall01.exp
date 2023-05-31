@@ -1,0 +1,86 @@
+{
+    /* Evaluate */
+    
+    
+    dxbase=256.0e2;
+    dx=32.0e2;
+    dybase=256.0e2;
+    dy=32.0e2;
+    
+    
+    
+    x1=0;    
+    y1=0;
+    
+    x2=10*dxbase;    
+    y2=10*dybase;
+    
+    nangle=18;
+    
+   	for(k=0;k<nangle;++k){
+       if(k == 0){
+           x1=dxbase;
+           y1=dybase;
+           x2=10*dxbase; 
+           y2=dybase;
+       	}else if(k == 1){
+            y1=dybase+dy*1e-6;
+		}else if(k == 2){
+            y1=dybase-dy*1e-6;
+       	}else if(k == 3){
+             y1=dybase;
+            y2=dybase+dy*1e-6;
+      	}else if(k == 4){
+            y2=dybase-dy*1e-6;
+       	}else if(k == 5){
+            y1=dybase+dy*1e-6;
+            y2=dybase+dy*1e-6;
+       	}else if(k == 6){
+            y2=dybase-dy*1e-6;
+      	}else if(k == 7){
+            y1=dybase-dx*1e-6;
+            y2=dybase+dy*1e-6;
+       	}else if(k == 8){
+           y2=dybase-dy*1e-6;
+       	}else if(k == 9){
+            x2=dxbase; 
+            x1=10*dxbase; 
+            y1=dybase;
+            y2=dybase;
+      	}else if(k == 10){
+            y1=dybase+dy*1e-6;
+       	}else if(k == 11){
+             y1=dybase-dy*1e-6;
+      	}else if(k == 12){
+             y1=dybase;
+            y2=dybase+dy*1e-6;
+       	}else if(k == 13){
+            y2=dybase-dy*1e-6;
+       	}else if(k == 14){
+            y1=dybase+dy*1e-6;
+            y2=dybase+dy*1e-6;
+       	}else if(k == 15){
+            y2=dybase-dy*1e-6;
+       	}else if(k == 16){
+            y1=dybase-dx*1e-6;
+            y2=dybase+dy*1e-6;
+      	}else if(k == 17){
+           y2=dybase-dy*1e-6;
+      	}
+    
+        
+    	lineplotset(s, x1,y1,0.0 ,x2,y2,0.0, 0);
+
+    	setoption(s,"integrate",1);
+
+    	out[k]=s:density;
+    	
+    	lineplotout(out[k],s);
+    	
+   	   	
+    }
+ 
+     lineplotgather(1);
+ 	
+    
+}

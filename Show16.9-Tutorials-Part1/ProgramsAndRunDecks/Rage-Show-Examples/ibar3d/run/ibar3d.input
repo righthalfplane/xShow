@@ -1,0 +1,147 @@
+!     SAGE Input
+
+pname = "ibar3d"
+
+mincellpe = 10
+
+kread =   -1              ! (start cycle  -1=not a restart)
+ncmax =   16000           ! Maximum number of cycles (20000 for fine zones)
+
+tmax = 5.0e-6             ! Maximum time (sec) (full + pulse at 20m)
+
+secmax = 350000           ! Maximum wallclock duration (sec) (350000 = 97.2 hr)
+
+ncedit = 50000            ! frequency of full output and restart dumps
+modcyc = 50000            ! frequency of short output
+
+secdump = 1000000         ! wall time period of restart dumps (default 1800 sec)
+
+
+tedit = 1.0e-7
+
+
+hdfnum = 4
+hdfdt = 4*1.e-7
+hdftype = 'rho', 'prs', 'sj2', 'eps'
+hdfimx =  4*120
+hdfjmx =  4*320
+hdfkmx =  4*100
+hdfxmn = 4*0.0
+hdfxmx = 4*1.2
+hdfymn = 4*0.0
+hdfymx = 4*3.2
+hdfzmn = 4*0.0
+hdfzmx = 4*1.0
+
+
+debug = 0
+tstab = 0.2
+cstab = 0.9
+
+! -- Physics packages
+
+dohydro = .true.
+
+! -- Plots
+! ---- One dimensional plots
+
+! onenum = 4
+! onetype(1) = "rho", "prs", "xdt", "ubx"
+
+grid = .false.
+
+flggeo = 0
+flgvec = 0
+
+! Geometry
+sphere = .false.          ! 1-D spherical geometry
+cylin  = .false.          ! 2-D cylindrical geometry
+
+imxset = 6               ! even number of base grid zones in x direction
+jmxset = 22              ! even number of base grid zones in y direction
+kmxset = 6               ! even number of base grid zones in x direction
+dxset = .16              ! x zone width 
+dyset = .16              ! y zone width 
+dzset = .16              ! y zone width 
+xzero =  0.0             ! left edge of grid
+yzero =  0.00            ! bottom edge of grid
+zzero =  0.0             ! left edge of grid
+
+mxcells = 1500000          ! maximum number of zones
+
+numdzn = 0                 ! number of dezone regions
+
+! -- EOS setup
+
+nummat = 2                ! number of materials
+
+keos   = -1
+
+matdef(16,1) = 0.4            ! air
+matdef(30,1) = 1.0e11
+
+matdef(3,2)   = 1.3e12         ! Cu
+matdef(16,2)  = 0.8939
+matdef(21,2)  = 8.93
+matdef(26,2)  = 0.0257
+matdef(28,2)  = 1.0e6
+matdef(30,2)  = 2.886e11
+
+matdef(5,2)  =    -1.0e33
+matdef(7,2)  = 4.33333e11
+matdef(12,2)  =    4.00e9
+matdef(39,2)  =       1
+matdef(49,2)  =    1.0e10
+
+
+
+maxcellpe = 1000000
+
+!  Definition of the material regions
+
+numreg = 2
+
+matreg(1) = 1             ! ambient air
+typreg(1) = 0             ! 
+prsreg(1) = 1.013e6       ! pressure dy/cm**2
+tevreg(1) = 0.0256917     ! # temperature (eV)  (eV*11604.9 = deg K)
+
+matreg(2) = 2             ! ambient air
+typreg(2) = 6             ! 
+prsreg(2) = 1.013e6       ! pressure dy/cm**2
+tevreg(2) = 0.0256917     ! # temperature (eV)  (eV*11604.9 = deg K)
+
+xreg(1,2) =   0.0
+yreg(1,2) =   0.0
+zreg(1,2) =   0.0
+diareg(1,2) = .64   ! diameter not radius
+
+xreg(2,2) =    0.0
+yreg(2,2) =   3.24
+zreg(2,2) =   0.00
+diareg(2,2) =  .64  ! diameter not radius
+
+ydreg(2) = -22700
+
+! CHANGES
+
+!eosfile = "ibar_teos"
+!shortmodcyc = 1
+uselast = .false.
+numinit = 0
+numlev = 1
+fvolpct = 0.01
+sizemat(1) = 0.32, 0.02
+sizebnd(1) = 0.32, 0.02
+
+sizemat(1) = 0.32, 0.04
+sizebnd(1) = 0.32, 0.04
+
+dodmpxdt = .true.
+
+strength_option = 1
+
+hydro_version = 2
+
+interface_option = 2
+

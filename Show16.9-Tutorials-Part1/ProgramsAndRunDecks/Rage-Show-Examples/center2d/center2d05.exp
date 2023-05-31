@@ -1,0 +1,99 @@
+{
+    /* Evaluate */
+    
+    /* test integration routines inside circle */
+    
+    
+ 
+    
+    r=4.8;
+
+    xc=10.5;
+    
+    yc=10.5;
+    
+    zc=0;
+    
+    den=8.93014;
+    
+    lines=10000;
+    
+    time=seconds(0);
+    
+    npoints=0;
+    
+    for(m=0;m<lines;++m){
+    
+        dx=r*2*(random(0)-0.5);
+    
+        dy=r*2*(random(0)-0.5);
+    
+        dz=0;
+        
+     	l=sqrt((dx)*(dx)+(dy)*(dy)+(dz)*(dz));
+     	
+    	if(l > r){
+    	    dx *= r/l;
+    	    dy *= r/l;
+    	    dz *= r/l;
+    	}
+   
+    	x1=xc+dx;
+    
+    	y1=yc+dy;
+    
+    	z1=zc+dz;
+
+
+        dx=r*2*(random(0)-0.5);
+    
+        dy=r*2*(random(0)-0.5);
+    
+        dz=0;
+        
+     	l=sqrt((dx)*(dx)+(dy)*(dy)+(dz)*(dz));
+     	
+    	if(l > r){
+    	    dx *= r/l;
+    	    dy *= r/l;
+    	    dz *= r/l;
+    	}
+
+
+    	x2=xc+dx;
+    
+    	y2=yc+dy;
+    
+    	z2=zc+dz;
+    	
+    	
+    	l=sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)+(z2-z1)*(z2-z1));
+    	
+        
+    	lineplotset(s, x1,y1,z1 ,x2,y2,z2, 0);
+
+    	setoption(s,"integrate",1);
+
+    	out=s:density;
+    	
+    	integral=getoption(out,"integral");
+    	
+    	npoints += getoption(out,"xsize");
+    	
+    	free(out);
+    	v=integral/l;
+    	if(v < den-.0001 || v > den+.0001){
+     		print("l %g ",l); 
+     		print("integral %g ",integral); 
+     		print("integral %g\n",v); 
+        }
+     	 
+     }
+ 
+     time=seconds(0)-time;
+     
+     print("lines %g ",lines);
+     print("npoints %g ",npoints);
+     print("time %g\n",time);
+    
+}

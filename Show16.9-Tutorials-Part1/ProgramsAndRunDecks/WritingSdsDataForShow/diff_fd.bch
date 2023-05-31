@@ -1,0 +1,47 @@
+!
+! load this file into an Show expression window
+! close windows "f", "d", and "diff_fd" before running - if they exist
+! make sure the file paths are correct
+! select "Run as Batch" from the "Operations" menu in the expression window
+! diff_fd shows the precision lost by using floats instead of doubles
+!
+
+clear
+
+filelist open f "/Users/dir/CodeWarrior_8.0/mShow/mShow-Other/WritingDataForShow"
+	waveFloat.s2d
+end
+
+filelist open d "/Users/dir/CodeWarrior_8.0/mShow/mShow-Other/WritingDataForShow"
+    waveDouble.s2d
+end
+
+expression
+{
+    xmin=0;
+    xmax=1440;
+    ymin=480;
+    ymax=1440;
+    
+    xsize=720;
+    ysize=480;
+     
+    areaplotset(f,xmin,ymin,0, xmax,ymax,0,xsize,ysize,1);
+    areaplotset(d,xmin,ymin,0, xmax,ymax,0,xsize,ysize,1);
+    window("diff_fd",size(xsize,ysize));
+
+    outs=f;
+    outd=d;
+        
+   maxf=max(fabs(outd));
+   diff_fd=100*fabs(outs-outd)/maxf;
+   print("maximum percentage difference %g\n",max(diff_fd));
+   
+   plotsetlimits(diff_fd,"diff",d);
+
+}
+step d
+end
+filelist close s
+filelist close d
+exit

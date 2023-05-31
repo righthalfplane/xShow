@@ -1,0 +1,19 @@
+{
+    areaplotset(s,0,0,0, 3.1415926,3.1415926,0,100,100,1);
+    areaplotset(d,0,0,0, 3.1415926,3.1415926,0,100,100,1);
+    /* window("outs",size(100,340)); */
+    /* window("outd",size(100,340)); */
+    window("both",size(200,100));
+    window("diff",size(100,100));
+
+        outs=s:tev;
+        outd=d:tev;
+        
+   maxf=max(fabs(outd));
+   diff=100*fabs(outs-outd)/maxf;
+   print("maximum percentage difference %g\n",max(diff));
+   both=insert(both,xflip(outd),0,0);
+   both=insert(both,outs,100,0);
+   plotsetrange(both,"tev",s,-3.1415926,0,0,3.1415926,3.1415926,0);
+
+}

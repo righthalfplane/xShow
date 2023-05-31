@@ -1,0 +1,149 @@
+!     SAGE Input
+
+pname = "cent"
+
+
+mincellpe = 10
+
+kread =   -1              ! (start cycle  -1=not a restart)
+ncmax =   16000           ! Maximum number of cycles (20000 for fine zones)
+
+tmax = 5.0e-7          ! Maximum time (sec) (full + pulse at 20m)
+
+secmax = 350000           ! Maximum wallclock duration (sec) (350000 = 97.2 hr)
+
+ncedit = 50000              ! frequency of full output and restart dumps
+modcyc = 50000              ! frequency of short output
+
+secdump = 1000000         ! wall time period of restart dumps (default 1800 sec)
+
+! -- Identify small regions
+
+
+tedit = 1.0e-7
+
+debug = 0
+tstab = 0.2
+cstab = 0.9
+
+! -- Physics packages
+
+dohydro = .true.
+
+! -- Plots
+! ---- One dimensional plots
+
+! onenum = 4
+! onetype(1) = "rho", "prs", "xdt", "ubx"
+
+grid = .false.
+
+flggeo = 0
+flgvec = 0
+
+
+hdfnum = 2
+!hdfdt = 1.e-6, 1.e-6, 1.e-6, 1.e-6, 1.e-6, 1.e-6, 1.e-6
+hdfdt = 1.e-7, 1.e-7, 1.e-7, 1.e-7, 1.e-7, 1.e-7, 1.e-7
+hdftype = 'rho', 'prs', 'sj2', 'syy', 'eps', 'sxx', 'ydt'
+hdfimx =  400, 400, 400, 400, 400, 400, 400
+hdfjmx =  400, 400, 400, 400, 400, 400, 400
+hdfkmx =  400, 400, 400, 400, 400, 400, 400
+hdfxmn = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+hdfxmx = 20, 20, 20, 20, 20, 20, 20
+hdfymn = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+hdfymx = 20, 20, 20, 20, 20, 20, 20
+hdfzmn = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+hdfzmx = 20, 20, 20, 20, 20, 20, 20
+
+
+
+! Geometry
+sphere = .false.          ! 1-D spherical geometry
+cylin  = .false.           ! 2-D cylindrical geometry
+
+imxset = 22              ! even number of base grid zones in x direction
+jmxset = 22             ! even number of base grid zones in y direction
+kmxset = 22             ! even number of base grid zones in y direction
+dxset = 1.0              ! x zone width 
+dyset = 1.0              ! y zone width 
+dzset = 1.0              ! y zone width 
+xzero =  -1.0             ! left edge of grid
+yzero =  -1.0            ! bottom edge of grid
+zzero =  -1.0            ! bottom edge of grid
+
+
+mxcells = 1500000          ! maximum number of zones
+
+numdzn = 0                 ! number of dezone regions
+
+! -- EOS setup
+
+nummat = 2                ! number of materials
+
+keos   = -1
+
+matdef(16,1) = 0.4            ! air
+matdef(30,1) = 1.0e11
+
+matdef(3,2)   = 1.3e12         ! Cu
+matdef(16,2)  = 0.8939
+matdef(21,2)  = 8.93
+matdef(26,2)  = 0.0257
+matdef(28,2)  = 1.0e6
+matdef(30,2)  = 2.886e11
+
+!matdef(5,2)  =    -1.0e33
+!matdef(7,2)  = 4.33333e11
+!matdef(12,2)  =    4.00e9
+!matdef(39,2)  =       1
+!matdef(49,2)  =    1.0e10
+
+
+! -- secondary combustion setup
+
+
+maxcellpe = 4000000
+
+
+!  Definition of the material regions
+
+numreg = 2
+
+matreg(1) = 1             ! ambient air
+typreg(1) = 0             ! 
+prsreg(1) = 1.013e6       ! pressure dy/cm**2
+tevreg(1) = 0.0256917    ! # 0.024832=15 C  0.0256917=25 C)
+
+
+
+matreg(2) = 2            ! 
+typreg(2) = 1            ! 
+diareg(1,2) = 10.0
+xreg(1,2) = 10.5
+yreg(1,2) = 10.5
+zreg(1,2) = 10.5
+rdreg(2) = 20000
+prsreg(2) = 1.013e6      ! ambient pressure
+tevreg(2) = 0.0256917    ! # 0.024832=15 C  0.0256917=25 C)
+
+
+
+! CHANGES
+
+uselast = .false.
+numinit = 0
+numlev = 1
+fvolpct = 0.01
+sizemat(1) = 1, 0.1
+sizebnd(1) = 1, 0.1
+
+dodmpxdt = .true.
+
+strength_option = 1
+
+hydro_version = 2
+
+interface_option = 2
+
+

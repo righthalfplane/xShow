@@ -1,0 +1,25 @@
+{
+    areaplotset(s,0,0,0, 1.0,3.2,0,200,640,1);
+    areaplotset(d,0,0,0, 1.0,3.2,0,200,640,1);
+    window("outs",size(200,640));
+    window("outd",size(200,640));
+    window("both",size(400,640));
+    window("diff",size(200,640));
+
+    if(s:density > 1.0){
+        /* outs=s:xdt; */
+
+        /* sj2= sqrt(3.0*(s:sxx*s:sxx+s:syy*s:syy+s:sxx*s:syy+s:sxy*s:sxy)); */
+        outs=s:pres;
+        outd=d;
+    }else{
+        outs= 0;
+        outd= 0;
+    }
+
+   maxf=max(fabs(outd));
+   diff=100*fabs(outs-outd)/maxf;
+   print("maximum percentage difference %g\n",max(diff));
+   both=insert(both,xflip(outd),0,0);
+   both=insert(both,outs,200,0);
+}

@@ -1,0 +1,195 @@
+!     SAGE Input
+
+pname = "cube3d"
+
+
+mincellpe = 10
+
+kread =   -1              ! (start cycle  -1=not a restart)
+ncmax =    9000000        ! Maximum number of cycles (20000 for fine zones)
+
+tmax = 5.0e-5             ! Maximum time (sec) (full + pulse at 20m)
+
+secmax = 350000           ! Maximum wallclock duration (sec) (350000 = 97.2 hr)
+
+ncedit = 50000            ! frequency of full output and restart dumps
+modcyc = 50000            ! frequency of short output
+
+secdump = 1000000         ! wall time period of restart dumps (default 1800 sec)
+
+! -- Identify small regions
+
+
+tedit = 5.0e-7
+
+debug = 0
+tstab = 0.2
+cstab = 0.9
+
+! -- Physics packages
+
+dohydro = .true.
+
+! -- Plots
+! ---- One dimensional plots
+
+! onenum = 4
+! onetype(1) = "rho", "prs", "xdt", "ubx"
+
+grid = .false.
+
+flggeo = 0
+flgvec = 0
+
+! Geometry
+sphere = .false.           ! 1-D spherical geometry
+cylin  = .false.           ! 2-D cylindrical geometry
+
+imxset = 42              ! even number of base grid zones in x direction
+jmxset = 28              ! even number of base grid zones in y direction
+kmxset = 10               ! even number of base grid zones in x direction
+dxset = .25              ! x zone width 
+dyset = .25              ! y zone width 
+dzset = .25              ! y zone width 
+xzero =  -3.25             ! left edge of grid
+yzero =  0.00            ! bottom edge of grid
+zzero =  -0.25              ! left edge of grid
+
+mxcells = 1500000          ! maximum number of zones
+
+numdzn = 0                 ! number of dezone regions
+
+! -- EOS setup
+
+keos   =  0
+nummat =  2
+
+matdef(1,1)  =  0.0
+matdef(16,1) =  0.4
+matdef(30,1) =  1.0e11
+matdef(20,1) =  .01
+
+
+matdef(1,2)  =  0.0
+matdef(16,2) =  0.4
+matdef(30,2) =  1.0e11
+matdef(20,2) =  .01
+
+
+! -- secondary combustion setup
+
+
+maxcellpe = 1000000
+
+!  Definition of the material regions
+
+numreg = 6
+
+matreg(1) = 1             ! ambient air
+typreg(1) = 0             ! 
+prsreg(1) = 1.013e6       ! pressure dy/cm**2
+tevreg(1) = 0.0256917     ! # temperature (eV)  (eV*11604.9 = deg K)
+xdreg(1)  = 4e5
+
+
+matreg(2) =  2            ! ambient air region for more refinement
+typreg(2) =  4            ! 
+prsreg(2) = 1.013e6       ! pressure dy/cm**2
+tevreg(2) = 0.0256917     ! # temperature (eV)  (eV*11604.9 = deg K)
+xdreg(2)  = 4e5
+
+xreg(1,2) =   -0.25
+yreg(1,2) =   2.75
+
+xreg(2,2) =    1.25
+yreg(2,2) =    2.75
+
+xreg(3,2) =    1.25
+yreg(3,2) =    4.25
+
+xreg(4,2) =   -0.25
+yreg(4,2) =    4.25
+
+
+matreg(3) = -10           ! The sticky attached Cube
+typreg(3) =  4            ! 
+
+xreg(1,3) =   0.0
+yreg(1,3) =   3.0
+
+xreg(2,3) =    1.0
+yreg(2,3) =    3.0
+
+xreg(3,3) =    1.0
+yreg(3,3) =    4.0
+
+xreg(4,3) =    0.0
+yreg(4,3) =    4.0
+
+
+matreg(4) = -1            ! The Bottom Floor
+typreg(4) = 6             ! 
+
+xreg(1,4) =   0.0
+yreg(1,4) =   0.0
+zreg(1,4) =   -0.25
+diareg(1,4) = 100   ! diameter not radius
+
+xreg(2,4) =    0.0
+yreg(2,4) =   0.0
+zreg(2,4) =   0
+diareg(2,4) =  100  ! diameter not radius
+
+
+matreg(5) = 1             ! ambient air above cube
+typreg(5) = 6             ! 
+prsreg(5) = 1.013e6       ! pressure dy/cm**2
+tevreg(5) = 0.0256917     ! # temperature (eV)  (eV*11604.9 = deg K)
+xdreg(5) = 4e5
+
+xreg(1,5) =   0.0
+yreg(1,5) =   0.0
+zreg(1,5) =   1
+diareg(1,5) = 100   ! diameter not radius
+
+xreg(2,5) =    0.0
+yreg(2,5) =   0.0
+zreg(2,5) =   4
+diareg(2,5) =  100  ! diameter not radius
+
+
+matreg(6) = -1            ! The Roof
+typreg(6) = 6             !  
+prsreg(6) = 1.013e6       ! pressure dy/cm**2
+tevreg(5) = 0.0256917     ! # temperature (eV)  (eV*11604.9 = deg K)
+
+xreg(1,6) =   0.0
+yreg(1,6) =   0.0
+zreg(1,6) =   2
+diareg(1,6) = 100   ! diameter not radius
+
+xreg(2,6) =    0.0
+yreg(2,6) =   0.0
+zreg(2,6) =   4
+diareg(2,6) =  100  ! diameter not radius
+
+
+freeze_num = 1
+
+
+freeze_x_lo(1) = -4.0
+freeze_x_hi(1) = -3.0
+
+outflow_x_hi = .true.
+
+uselast = .false.
+numinit = 0
+numlev = 1
+fvolpct = 0.01
+sizemat(1) = 0.25, 0.0625
+sizebnd(1) = 0.25, 0.0625
+
+dodmpxdt = .true.
+
+
+

@@ -1,0 +1,17 @@
+{
+    areaplotset(s,0,0,0, 1.0,3.2,0,200,640,1);
+    areaplotset(d,0,0,0, 1.0,3.2,0,200,640,1);
+    window("outs",size(200,640));
+    window("outd",size(200,640));
+    window("both",size(400,640));
+    window("diff",size(200,640));
+
+        outs=s:pres;
+        outd=d:pres;
+
+   maxf=max(fabs(outd));
+   diff=100*fabs(outs-outd)/maxf;
+   print("maximum percentage difference %g\n",max(diff));
+   both=insert(both,xflip(outd),0,0);
+   both=insert(both,outs,200,0);
+}

@@ -1,0 +1,38 @@
+{
+/* 
+   Open this file into a Show expression window
+   Open file waveFloat.s2d
+   Change the window name to "f" with the "Information" dialog
+   Open file waveDouble.s2d
+   Change the window name to "d" with the "Information" dialog
+   Close window "diff_fd" - if it exists
+   Select "Auto..." from the "Operations" menu to open the "Auto" dialog
+   Set the controller to "d" in the "Auto" dialog
+   Click the "Ok" button in the "Auto" dialog
+   The window "diff_fd" should open with the results.
+    
+   diff_fd shows the precision lost by using floats instead of doubles
+      
+*/
+    xmin=0;
+    xmax=1440;
+    ymin=480;
+    ymax=1440;
+    
+    xsize=720;
+    ysize=480;
+    
+    areaplotset(f,xmin,ymin,0, xmax,ymax,0,xsize,ysize,1);
+    areaplotset(d,xmin,ymin,0, xmax,ymax,0,xsize,ysize,1);
+    window("diff_fd",size(xsize,ysize));
+
+    outs=f;
+    outd=d;
+        
+   maxf=max(fabs(outd));
+   diff_fd=100*fabs(outs-outd)/maxf;
+   print("maximum percentage difference %g\n",max(diff_fd));
+   
+   plotsetlimits(diff_fd,"pres",d);
+
+}

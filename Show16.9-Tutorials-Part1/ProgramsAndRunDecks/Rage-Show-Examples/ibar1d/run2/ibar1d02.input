@@ -1,0 +1,97 @@
+# Elastic Plastic Test Problem
+
+
+pname = "ibar1d"
+
+
+! Geometry
+
+sphere = .false.           ! 1-D spherical geometry
+cylin  = .false.           ! 2-D cylindrical geometry
+
+
+! CONTROL
+
+kread = -1
+ncmax = 5000
+tmax = 5.0e-6
+tedit = 1.0e-7
+ncedit = 0
+modcyc = 0
+dtpct = 0.0
+shortmodcyc = 50
+
+
+! PLOTS
+
+grid = .false.
+
+!onenum = 6
+!onetype(1) = 'prs', 'rho', 'xdt', 'sxx', 'txx', 'ste'
+!onexmn(1) = .0 , .0, .0 , .0, .0, .0
+!onexmx(1) = 5., 5., 5., 5., 5., 5.
+
+! SETUP
+
+imxset = 1002
+jmxset =    2
+dxset = 0.005
+dyset = 0.005
+xzero = -0.01
+
+! MATERIALS
+
+nummat = 2                ! number of materials
+
+
+keos   = -1
+
+
+matdef(3,1)   = 1.3e12         ! Cu
+matdef(16,1)  = 0.8939
+matdef(21,1)  = 8.93
+matdef(26,1)  = 0.0257
+matdef(28,1)  = 1.0e6
+matdef(30,1)  = 2.886e11
+
+matdef(5,1)  =    -1.0e33
+matdef(7,1)  = 4.33333e11
+matdef(12,1)  =    4.00e9
+matdef(39,1)  =       1
+matdef(49,1)  =    1.0e10
+
+matdef(16,2) = 0.4            ! air
+matdef(30,2) = 1.0e11
+
+
+! REGIONS
+
+numreg = 3
+matreg(1) = 1
+prsreg(1) = 1.0e6
+tevreg(1) = 0.025
+
+matreg(2) = 1
+xlreg(2) = 0.0
+xrreg(2) = 0.51
+prsreg(2) = 1.0e6
+tevreg(2) = 0.025
+xdreg(2) = 0.08e6
+
+matreg(3) = 2
+xlreg(3) = -0.01
+xrreg(3) =  0.00
+prsreg(3) = 1.0e6
+tevreg(3) = 0.025
+
+
+! HYDRO
+
+dodmpxdt = .true.
+
+strength_option = 1
+
+hydro_version = 2
+
+interface_option = 2
+

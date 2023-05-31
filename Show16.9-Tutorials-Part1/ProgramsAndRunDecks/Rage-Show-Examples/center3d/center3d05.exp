@@ -1,0 +1,115 @@
+{
+    /* Evaluate */
+    
+    /* test line integration along lines inside shere at t = 0 */
+ 
+    
+    r=4.7;
+
+    xc=10.5;
+    
+    yc=10.5;
+    
+    zc=10.5;
+    
+    den=8.93014;
+    
+    lines=20000;
+    
+    time=seconds(0);
+    
+    npoints=0;
+    
+    for(m=0;m<lines;++m){
+    
+        dx=r*2*(random(0)-0.5);
+    
+        dy=r*2*(random(0)-0.5);
+    
+        dz=r*2*(random(0)-0.5);
+        
+     	l=sqrt((dx)*(dx)+(dy)*(dy)+(dz)*(dz));
+     	
+    	if(l > r){
+    	    dx *= r/l;
+    	    dy *= r/l;
+    	    dz *= r/l;
+    	}
+   
+    	x1=xc+dx;
+    
+    	y1=yc+dy;
+    
+    	z1=zc+dz;
+
+
+        dx=r*2*(random(0)-0.5);
+    
+        dy=r*2*(random(0)-0.5);
+    
+        dz=r*2*(random(0)-0.5);
+        
+     	l=sqrt((dx)*(dx)+(dy)*(dy)+(dz)*(dz));
+     	
+    	if(l > r){
+    	    dx *= r/l;
+    	    dy *= r/l;
+    	    dz *= r/l;
+    	}
+
+
+    	x2=xc+dx;
+    
+    	y2=yc+dy;
+    
+    	z2=zc+dz;
+    	
+    	
+    	l=sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)+(z2-z1)*(z2-z1));
+    	
+        
+    	lineplotset(s, x1,y1,z1 ,x2,y2,z2, 0);
+
+    	setoption(s,"integrate",1);
+
+    	out=s:density;
+    	
+    	integral=getoption(out,"integral");
+ 
+        npoints += getoption(out,"xdata");
+  	
+    	   	   	
+    	v=integral/l;
+    	if(v < den-.0001 || v > den+.0001){
+     		print("l %g ",l); 
+     		print("integral %g ",integral); 
+     		print("integral %g\n",v); 
+     		print("x1 %g ",x1);
+     		print("y1 %g ",y1);
+     		print("z1 %g ",z1);
+    	    l=sqrt((x1-xc)*(x1-xc)+(y1-yc)*(y1-yc)+(z1-zc)*(z1-zc));
+     		print("r %g \n",l);
+     		print("x2 %g ",x2);
+     		print("y2 %g ",y2);
+     		print("z2 %g ",z2);
+   	        l=sqrt((x2-xc)*(x2-xc)+(y2-yc)*(y2-yc)+(z2-zc)*(z2-zc));
+     		print("r %g \n",l);
+      	    xsize=getoption(out,"xsize");
+      		print("xsize %g ",xsize);
+     	    xdata=getoption(out,"xdata");
+     	    v=pick(xdata,xsize-1);
+       		print("last %g \n\n",v);
+       		free(xdata);
+  		
+        }
+        
+    	free(out);
+     	 
+     }
+ 
+     time=seconds(0)-time;
+     
+     print("lines %g ",lines);
+     print("time %g\n",time);
+    
+}

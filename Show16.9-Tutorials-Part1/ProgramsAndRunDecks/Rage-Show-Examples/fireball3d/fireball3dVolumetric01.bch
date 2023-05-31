@@ -1,0 +1,68 @@
+clear
+
+filelist open r3d "/Volumes/Western/Rage-Show-Examples/fireball3d/run"
+fireball3d-dmp000000    fireball3d-dmp000065    fireball3d-dmp000130    fireball3d-dmp000197    fireball3d-dmp000265    fireball3d-dmp000334
+fireball3d-dmp000406    fireball3d-dmp000481    fireball3d-dmp000558    fireball3d-dmp000635    fireball3d-dmp000710    fireball3d-dmp000784
+fireball3d-dmp000856    fireball3d-dmp000927    fireball3d-dmp000996    fireball3d-dmp001065    fireball3d-dmp001134    fireball3d-dmp001203
+fireball3d-dmp001272    fireball3d-dmp001341    fireball3d-dmp001410    fireball3d-dmp001479    fireball3d-dmp001547    fireball3d-dmp001615
+fireball3d-dmp001683    fireball3d-dmp001751    fireball3d-dmp001820    fireball3d-dmp001888    fireball3d-dmp001956    fireball3d-dmp002025
+fireball3d-dmp002093    fireball3d-dmp002160    fireball3d-dmp002225    fireball3d-dmp002290    fireball3d-dmp002354    fireball3d-dmp002419
+fireball3d-dmp002484    fireball3d-dmp002549    fireball3d-dmp002614    fireball3d-dmp002679    fireball3d-dmp002744    fireball3d-dmp002808
+fireball3d-dmp002872    fireball3d-dmp002935    fireball3d-dmp002998    fireball3d-dmp003061    fireball3d-dmp003125    fireball3d-dmp003188
+fireball3d-dmp003251    fireball3d-dmp003314    fireball3d-dmp003377    fireball3d-dmp003439    fireball3d-dmp003501    fireball3d-dmp003563
+fireball3d-dmp003625    fireball3d-dmp003687    fireball3d-dmp003748    fireball3d-dmp003809    fireball3d-dmp003871    fireball3d-dmp003932
+fireball3d-dmp003993    fireball3d-dmp004053    fireball3d-dmp004114    fireball3d-dmp004174    fireball3d-dmp004234
+end
+
+filelist set r3d
+outputDirectory "/Volumes/Western/Rage-Show-Examples/fireball3d/images"
+outputName "volumetric"
+outputSequenceNumber 0
+end
+
+sagevol r3d
+
+threads 5
+
+datatype tev 0
+
+dmin 0.0
+dmax 0.0
+
+debug 2
+
+BackGround 1 1 1
+
+xsize 720
+ysize 480
+
+use depth 1600
+
+! angle view
+
+Eye 1.6e6 1.8e6 1.6e6
+Lamp  1.6e6 1.8e6 1.6e6
+Height 1
+Up 0.0 1.0 0.0
+Target 256000 512000 256000
+Degrees 30
+
+opacity
+0       0.0
+0.024   0.0
+0.025   0.1 
+end
+
+sagetrace all
+
+end
+
+filelist close r3d
+exit
+
+
+
+
+
+
+

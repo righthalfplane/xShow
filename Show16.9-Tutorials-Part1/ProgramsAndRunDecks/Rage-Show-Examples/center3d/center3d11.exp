@@ -1,0 +1,41 @@
+{
+    /* Export */
+    /* plot intergal around a circle in the sphere */
+    
+    r=8;
+    
+    pi=4.0*atan(1.0);
+    
+    xc=10.5;
+    
+    yc=10.5;
+    
+    zc=10.5;
+    
+    dtor=pi/180;
+    
+    nangle=360;
+    
+    
+    delta=360/nangle;
+    
+    /* for(k=0;k<nangle;++k){ */
+     k=315; {
+    
+       print("k = %g\n",k);
+    
+        angle=(k)*delta;
+        
+    	lineplotset(s, xc,yc,zc ,xc+r*cos(angle*dtor),yc+r*sin(angle*dtor),zc, 0);
+
+    	setoption(s,"integrate",1);
+    	    	
+    	y=s:density;
+   	   	
+    }
+    
+ 
+    lineplotout(y,s);
+       	
+    
+}

@@ -1,0 +1,38 @@
+{
+    nsum=100;
+    
+    window("tev",sizeof(s));
+    
+    
+    pi=4.0*atan(1.0);
+    	  
+    tev=0;
+    
+    t=frame*.01;
+    
+    a2=0.136562;
+    
+    sum1=tev;    
+    sum1=pi/4;
+    
+   
+    y=s:cell_center(2);
+   
+    for(n=1;n<nsum;++n){   
+    	sum1 += (sin(3*n*pi/4)-sin(n*pi/4))*cos(n*y)*exp(-a2*n*n*t)/n;
+    }
+
+    sum2=tev;    
+    sum2=pi/4;
+    
+	x=s:cell_center(1);
+    
+   	for(m=1;m<nsum;++m){
+    	sum2 += (sin(3*m*pi/4)-sin(m*pi/4))*cos(m*x)*exp(-a2*m*m*t)/m;
+   	}
+ 
+   	tev=400*(sum1*sum2)/(pi*pi);
+   	
+     plotsetlimits(tev,"tev",s);
+   
+}

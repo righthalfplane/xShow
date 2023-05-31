@@ -1,0 +1,52 @@
+{
+
+   /* Evaluate */
+   /* find and plot minimum radius */
+    
+    
+    pi=4.0*atan(1.0);
+    
+    
+    dtor=pi/180;
+    
+    
+    r=5.0;
+    
+    xc=10.5;
+    
+    yc=10.5;
+    
+    zc=10.5;
+    	
+    xsize=500;
+	ysize=500;
+
+    areaplotset(s,xc-r,yc-r,zc, xc+r,yc+r,zc, xsize,ysize,1);
+    
+    window("out",sizeof(s));
+ 	
+    rho=s:rho;
+    
+    rp=sqrt(
+           (s:cell_center(1)-xc)*(s:cell_center(1)-xc)+
+           (s:cell_center(2)-yc)*(s:cell_center(2)-yc)+
+           (s:cell_center(3)-zc)*(s:cell_center(3)-zc)
+      
+           );
+    
+    if(rho < 8.9301){
+        rho=0;
+    }
+    
+    if(rho > 0){
+       rp=1000;
+    }
+        
+    print("min(rp) %g\n",min(rp));  
+    
+    
+    
+    out=rp;
+ 
+    
+}
